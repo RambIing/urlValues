@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strings"
 )
+type Values map[string][]string
 type encoding int
 const (
 	encodePath encoding = 1 + iota
@@ -19,7 +20,6 @@ const (
 	encodeQueryComponent
 	encodeFragment
 )
-type Values map[string][]string
 
 func (v Values) Encode() string {
 	if v == nil {
