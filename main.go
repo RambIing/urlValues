@@ -51,7 +51,7 @@ func (v Values) EncodeWithOrder() string {
 	}
 	var buf strings.Builder
 	keys := make([]string, 0, len(v))
-	for k := range v {
+	for k := range v["ORDER"] {
 		keys = append(keys, k)
 	}
 	//sort.Strings(keys) sort ruins original order of our strings, so we remove it to keep order
