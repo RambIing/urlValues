@@ -1,3 +1,3 @@
-module github.com/RambIing/urlValues
+module github.com/umasii/urlValues
 
 go 1.16
