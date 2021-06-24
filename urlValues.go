@@ -13,7 +13,7 @@ import (
 type Values map[string][]string
 type encoding int
 
-const OrderKey = "ORDER"
+const OrderKey = "_GO_ORDER"
 
 const (
 	encodePath encoding = 1 + iota
