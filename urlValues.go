@@ -13,6 +13,8 @@ import (
 type Values map[string][]string
 type encoding int
 
+const OrderKey = "ORDER"
+
 const (
 	encodePath encoding = 1 + iota
 	encodePathSegment
@@ -34,6 +36,9 @@ func (v Values) Encode() string {
 	}
 	sort.Strings(keys)
 	for _, k := range keys {
+		if k == OrderKey {
+			continue
+		}
 		vs := v[k]
 		keyEscaped := QueryEscape(k)
 		for _, v := range vs {
@@ -52,12 +57,8 @@ func (v Values) EncodeWithOrder() string {
 		return ""
 	}
 	var buf strings.Builder
-	keys := make([]string, 0, len(v))
-	for _, k := range v["ORDER"] {
-		keys = append(keys, k)
-	}
 	//sort.Strings(keys) sort ruins original order of our strings, so we remove it to keep order
-	for _, k := range keys {
+	for _, k := range v[OrderKey] {
 		vs := v[k]
 		keyEscaped := QueryEscape(k)
 		for _, v := range vs {
@@ -74,10 +75,20 @@ func (v Values) EncodeWithOrder() string {
 
 func (v Values) Add(key, value string) {
 	v[key] = append(v[key], value)
+	v[OrderKey] = append(v[OrderKey], key)
 }
 
 func (v Values) Del(key string) {
 	delete(v, key)
+	oldOrder := v[OrderKey]
+	order := make([]string, len(oldOrder)-1)
+	for _, k := range oldOrder {
+		if key == k {
+			continue
+		}
+		order = append(order, k)
+	}
+	v[OrderKey] = order
 }
 
 func QueryEscape(s string) string {
