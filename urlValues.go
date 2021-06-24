@@ -9,8 +9,10 @@ import (
 	"sort"
 	"strings"
 )
+
 type Values map[string][]string
 type encoding int
+
 const (
 	encodePath encoding = 1 + iota
 	encodePathSegment
@@ -81,7 +83,9 @@ func (v Values) Del(key string) {
 func QueryEscape(s string) string {
 	return escape(s, encodeQueryComponent)
 }
+
 const upperhex = "0123456789ABCDEF"
+
 func escape(s string, mode encoding) string {
 	spaceCount, hexCount := 0, 0
 	for i := 0; i < len(s); i++ {
