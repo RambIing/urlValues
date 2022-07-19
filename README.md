@@ -1,5 +1,5 @@
 # urlValues
-Golang's net/url values edited to allow encoding w/o sorting.
+Golang's net/url values edited to allow encoding without sorting. It is highly recommended to use the built-in Encode function in net/url, however some web APIs require it to be in a certain order.
 
 # Installation
 ```
@@ -26,7 +26,7 @@ func Encode() {
 ```
 # Notice
 
-This package is meant to be lightweight, so its missing parts of net/url. This is only intended to add and encode values, and I used it for http requests with application/x-www-form-urlencoded
+This package is meant to be lightweight, so its missing parts of net/url. This is only intended to add and encode values.
 
 # Copyright
 This code uses parts of net/url code, and with BSD license, I must include the copyright below.
