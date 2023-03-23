@@ -60,14 +60,13 @@ func (v Values) EncodeWithOrder() string {
 	//sort.Strings(keys) sort ruins original order of our strings, so we remove it to keep order
 	for _, k := range v[OrderKey] {
 		vs := v[k]
-		keyEscaped := QueryEscape(k)
 		for _, v := range vs {
 			if buf.Len() > 0 {
 				buf.WriteByte('&')
 			}
-			buf.WriteString(keyEscaped)
+			buf.WriteString(k)
 			buf.WriteByte('=')
-			buf.WriteString(QueryEscape(v))
+			buf.WriteString(v)
 		}
 	}
 	return buf.String()
