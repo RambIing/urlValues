@@ -3,7 +3,7 @@ Golang's net/url values edited to allow encoding without sorting. It is highly r
 
 # Installation
 ```
-go get -u github.comm/RambIing/urlValues
+go get -u github.com/RambIing/urlValues
 ```
 # Usage
 ```go
